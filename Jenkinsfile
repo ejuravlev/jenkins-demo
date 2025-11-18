@@ -26,7 +26,14 @@ pipeline {
                             [name: "PRIVATE-TOKEN", value: token]
                         ]
 
-                        return httpRequest req
+                        return httpRequest(
+                            httpMode: "DELETE",
+                            url: cfg.url,
+                            customHeaders: newHeaders,
+                            contentType: cfg.contentType,
+                            acceptType: cfg.acceptType,
+                            ignoreSslErrors: cfg.ignoreSslErrors
+                        )
                     }
 
                     def response = httpDeleteWithPrivateToken(
